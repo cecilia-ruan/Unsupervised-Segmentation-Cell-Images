@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from skimage import segmentation
 
-from BaseSegmentation.base_utils import imshow_image, read_image, process_gauss_laplace
+from Segmentation.base_utils import imshow_image, read_image, process_gauss_laplace
 
 mark_boundaries = segmentation.mark_boundaries
 

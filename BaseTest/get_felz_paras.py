@@ -1,7 +1,7 @@
 import cv2
 from skimage import segmentation
 
-from BaseSegmentation.base_utils import normalization, imshow_image, save_image
+from Segmentation.base_utils import imshow_image
 
 mark_boundaries = segmentation.mark_boundaries
 

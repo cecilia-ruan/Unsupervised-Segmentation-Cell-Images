@@ -1,14 +1,13 @@
 import copy
 import os
-import time
 import torch
 import numpy as np
 import cv2
 
-from AISegmentation.cnn_utils import SegNet
-from BaseSegmentation.base_utils import read_image, \
-    process_gauss_laplace, felzenszwalb_seg, imshow_image, save_image, remove_small_points, normalization
-from BaseSegmentation.seg_evaluation import mean_iou, evalutation_seg
+from Segmentation.cnn_utils import SegNet
+from Segmentation.base_utils import read_image, \
+    process_gauss_laplace, felzenszwalb_seg, imshow_image
+from Segmentation.seg_evaluation import evalutation_seg
 
 
 class Args(object):

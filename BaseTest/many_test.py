@@ -3,10 +3,10 @@ import copy
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-from skimage import morphology, measure
+from skimage import measure
 
-from BaseSegmentation.base_utils import imshow_image, read_image, save_image, normalization
-from BaseSegmentation.seg_evaluation import evalutation_seg
+from Segmentation.base_utils import imshow_image, read_image, save_image, normalization
+from Segmentation.seg_evaluation import evalutation_seg
 
 
 def process_difference(img):
