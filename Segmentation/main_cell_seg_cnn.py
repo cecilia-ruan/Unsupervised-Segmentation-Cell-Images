@@ -21,21 +21,21 @@ class Args(object):
     target = cv2.resize(read_image(os.path.join(path, target_name)) / 255, input_size)
     target[np.where(target >= 0.5)] = 1
     target[np.where(target < 0.5)] = 0
-    is_scaling = True  # if True:将原图resize，if False:就从原图裁剪到input size
+    is_scaling = True  # if True:original image resize. if False: original image crop
     felz_paras_s = [72.13895789838335, 0.5635856085811202, 84.8644673048463]  # base
     # felz_paras_s = [60.13895789838335, 0.5635856085811202, 60.8644673048463]
     felz_paras_l = [152.8823808, 0.576, 548.8624596091704]
     train_epoch = 20
     mod_dim1 = 64
     mod_dim2 = 32
-    out_dim = 2  # 分割类别
+    out_dim = 2  # seg class number
 
 
 def run():
     args = Args()
     target = args.target
 
-    '''read test_image'''
+    '''read input image'''
     image_ori = cv2.imread(args.input_image_path)
     image_ori_gray = read_image(args.input_image_path)
     if args.is_scaling:
@@ -45,7 +45,7 @@ def run():
         image = image_ori[0:args.input_size[0], 0:args.input_size[1], :]
         image_gray = image_ori_gray[0:args.input_size[0], 0:args.input_size[1]]
 
-    '''get gauss laplace：都from原图，再resise到指定大小'''
+    '''get gauss laplace'''
     gauss_seg_map = process_gauss_laplace(image_ori_gray)
     if args.is_scaling:
         gauss_seg_map = cv2.resize(gauss_seg_map, args.input_size)
@@ -74,14 +74,12 @@ def run():
 
     '''show and save'''
     # imshow_image([image_gray, gauss_seg_map, felz_seg_map, combine_seg_map])
-
     # save_image(target*255, '{}/0.image_target.jpg'.format(args.out_directory))
     # save_image(image_gray, '{}/1.image_gray.jpg'.format(args.out_directory))
     # save_image(gauss_seg_map*255, '{}/2.gauss_seg_map.jpg'.format(args.out_directory))
     # print(np.max(felz_seg_map))
     # save_image(normalization(felz_seg_map)*255, '{}/3.felz_seg_map.jpg'.format(args.out_directory))
     # save_image(combine_seg_map*255, '{}/4.combine_seg_map.jpg'.format(args.out_directory))
-
     # return
 
     '''train init'''
@@ -107,9 +105,9 @@ def run():
         optimizer.step()
 
         '''refine'''
-        # for idx in felz_seg_index:
-        #     u_labels, hist = np.unique(output_flatten_class[idx], return_counts=True)
-        #     output_flatten_class[idx] = u_labels[np.argmax(hist)]
+        for idx in felz_seg_index:
+            u_labels, hist = np.unique(output_flatten_class[idx], return_counts=True)
+            output_flatten_class[idx] = u_labels[np.argmax(hist)]
 
         '''show loss'''
         decrease_rate = (last_loss - loss.item()) / last_loss * 100
@@ -126,9 +124,9 @@ def run():
         else:
             cv2.waitKey(500)
 
+    '''evaluation'''
     # save_image(cnn_seg_map*255, '{}/5.cnn_seg_map.jpg'.format(args.out_directory))
     imshow_image([image_gray, felz_seg_map, combine_seg_map, cnn_seg_map])
-
     evalutation_seg(gauss_seg_map, target, "gauss_seg_map")
     evalutation_seg(combine_seg_map, target, "combine_seg_map")
     evalutation_seg(cnn_seg_map, target, "cnn_seg_map")
