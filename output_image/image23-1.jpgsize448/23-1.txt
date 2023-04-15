@@ -1,0 +1,15 @@
+gauss_seg_map-------begin-----------
+gauss_seg_map-compute_acc: 0.77
+gauss_seg_map-mean_iou: 0.63
+gauss_seg_map-compute_kappa: 0.56
+gauss_seg_map-------end-----------
+combine_seg_map-------begin-----------
+combine_seg_map-compute_acc: 0.84
+combine_seg_map-mean_iou: 0.72
+combine_seg_map-compute_kappa: 0.68
+combine_seg_map-------end-----------
+cnn_seg_map-------begin-----------
+cnn_seg_map-compute_acc: 0.88
+cnn_seg_map-mean_iou: 0.78
+cnn_seg_map-compute_kappa: 0.75
+cnn_seg_map-------end-----------

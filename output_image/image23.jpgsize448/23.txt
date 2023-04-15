@@ -1,0 +1,23 @@
+gauss_seg_map-------begin-----------
+gauss_seg_map-mean_iou: 0.65
+gauss_seg_map-compute_f1: 0.77
+gauss_seg_map-compute_kappa: 0.58
+gauss_seg_map-compute_acc: 0.79
+gauss_seg_map-compute_recall: [0.91 0.68]
+gauss_seg_map-------end-----------
+combine_seg_map-------begin-----------
+combine_seg_map-mean_iou: 0.7
+combine_seg_map-compute_f1: 0.8
+combine_seg_map-compute_kappa: 0.65
+combine_seg_map-compute_acc: 0.83
+combine_seg_map-compute_recall: [0.89 0.75]
+combine_seg_map-------end-----------
+cnn_seg_map-------begin-----------
+cnn_seg_map-mean_iou: 0.71
+cnn_seg_map-compute_f1: 0.78
+cnn_seg_map-compute_kappa: 0.65
+cnn_seg_map-compute_acc: 0.84
+cnn_seg_map-compute_recall: [0.82 0.87]
+cnn_seg_map-------end-----------
+
+Process finished with exit code 0
